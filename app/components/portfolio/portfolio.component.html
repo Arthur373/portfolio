@@ -1,0 +1,45 @@
+<div class="filter-add">
+  <div>
+    <label for="status">Status</label>
+<!--    [ngModel]="selectedStatus" (ngModelChange)="filterStatus($event)"-->
+    <select name="country"  id="status"  [formControl]="statusControl">
+      <option value="0">--All statuses--</option>
+      <option *ngFor="let status of statuses" [value]="status.WFSTATEID">{{ status.name[3] }}</option>
+    </select>
+  </div>
+  <button>Create New Intervention</button>
+</div>
+
+<table>
+  <thead>
+  <tr>
+    <th>Intervention Code <i class="fa fa-sort"  (click)="sortTable('InterventionCode',$event)"></i></th>
+    <th>Short Name <i class="fa fa-sort"  (click)="sortTable('ShortName',$event)"></i></th>
+    <th>Title <i class="fa fa-sort"  (click)="sortTable('Title',$event)"></i></th>
+    <th>Country <i class="fa fa-sort"  (click)="sortTable('InterventionCountryID',$event)"></i></th>
+    <th>Status <i class="fa fa-sort"  (click)="sortTable('workflowStateId',$event)"></i></th>
+    <th>Last Update By <i class="fa fa-sort"  (click)="sortTable('UpdatedUserID',$event)"></i></th>
+    <th>Last Update On <i class="fa fa-sort"  (click)="sortTable('DateUpdated',$event)"></i></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr *ngFor="let data of filteredTableData" [hover]="color" >
+    <td>{{ data.InterventionCode }}</td>
+    <td>{{ data.ShortName }}</td>
+    <td>{{ data.Title }}</td>
+    <td>{{ (data | country | async)}}</td>
+    <td>{{ data | status | async }}</td>
+    <td>{{ data | user | async }}</td>
+    <td>{{ data.DateUpdated | date : "dd/MM/YYYY" }}</td>
+  </tr>
+  </tbody>
+</table>
+
+<div class="pagination-place">
+  <app-pagination [totalRecords]="filteredDataLength" [recordsPerPage]="recordsPerPage" (onPageChange)="onPageChange($event)"></app-pagination>
+</div>
+
+
+
+
