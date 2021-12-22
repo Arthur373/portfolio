@@ -1,14 +1,20 @@
 import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
-import {PortfolioComponent} from './components/portfolio/portfolio.component';
-import {SearchComponent} from './components/search/search.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {AppRoutingModule} from "./app-routing.module";
+import {CommonModule} from "@angular/common";
+import {BrowserModule} from "@angular/platform-browser";
+import {PortfolioComponent} from "./components/portfolio/portfolio.component";
+import {SearchComponent} from "./components/search/search.component";
 import {AppPaginationComponent} from "./components/app-pagination/app-pagination.component";
+import {RootComponent} from "./root/root.component";
+
+import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {SharedModule} from "./shared/shared.module";
 import {CoreModule} from "./core/core.module";
+import {InterventionDetailsComponent} from "./components/intervention-details/intervention-details.component";
+
 
 
 @NgModule({
@@ -17,13 +23,18 @@ import {CoreModule} from "./core/core.module";
     PortfolioComponent,
     SearchComponent,
     AppPaginationComponent,
+    RootComponent,
+    InterventionDetailsComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
     SharedModule,
-    CoreModule
+    CoreModule,
+    BrowserModule,
+    CommonModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,9 +7,5 @@ import {Search} from "./core/models/search.model";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  searchData!:Search;
 
-  getSearchFilterData(search: Search){
-    this.searchData = search;
-  }
 }

@@ -6,7 +6,7 @@ import {CountriesService} from "./countries.service";
 import {WorkflowStatesService} from "./workflowStates.service";
 import {UsersService} from "./users.service";
 import {HttpClient} from "@angular/common/http";
-import {map} from 'rxjs/operators';
+import {find, map} from 'rxjs/operators';
 import {zip} from "rxjs";
 import {PortfolioSortService} from "./portfolio-change/portfolio-sort.service";
 import {PortfolioFilterService} from "./portfolio-change/portfolio-filter.service";
@@ -52,6 +52,14 @@ export class PortfolioService {
         this.portfolioSortService.sortData(filteredData, countries, users, statuses, sortingOption.fieldName, sortingOption.sortType);
         filteredData = PortfolioService.getPaginationData(filteredData, currentPage, pageNumber);
         return {filteredData, filteredDataLength};
+      })
+    )
+  }
+
+  public getResponseById(id:number){
+    return this.getResponsesMapData().pipe(
+      map(portfolios => {
+        return portfolios.find(portfolio => portfolio.InterventionID === id);
       })
     )
   }

@@ -25,7 +25,7 @@
 
   <tbody>
   <tr *ngFor="let data of filteredTableData" [hover]="color" >
-    <td>{{ data.InterventionCode }}</td>
+    <td><a [routerLink]="['/intervention',data.InterventionID]">{{ data.InterventionCode }}</a></td>
     <td>{{ data.ShortName }}</td>
     <td>{{ data.Title }}</td>
     <td>{{ (data | country | async)}}</td>

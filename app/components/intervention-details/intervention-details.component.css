@@ -1,0 +1,22 @@
+.portfolio-details {
+  margin: 0 auto;
+  padding: 30px 20px;
+  /*width: 20%;*/
+  background-color: #B4B3B3;
+  font-family: Arial, serif;
+  border-radius: 8px;
+}
+
+.portfolio-details h2 span{
+  color: #ea4141;
+}
+
+.portfolio-details p{
+  font-weight: bold;
+  color: #3e3eef;
+}
+
+.portfolio-details p span{
+  font-weight: normal;
+  color: black;
+}

@@ -1,17 +1,18 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
 import {PortfolioService} from "../../core/services/portfolio.service";
 import {WorkflowStatesService} from "../../core/services/workflowStates.service";
 import {Search} from "../../core/models/search.model";
 import {Portfolio} from "../../core/models/portfolio.model";
 import {FormControl} from "@angular/forms";
 import {Status} from "../../core/models/status.model";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-portfolio',
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.css']
 })
-export class PortfolioComponent implements OnInit, OnChanges {
+export class PortfolioComponent implements OnInit, OnChanges,OnDestroy {
 
   @Input() searchData!: Search;
   responses: Portfolio[] = [];
@@ -29,6 +30,8 @@ export class PortfolioComponent implements OnInit, OnChanges {
   recordsPerPage: number = 4;
 
   color: string = "rgb(180, 179, 179)";
+
+  filterObservable:Subscription;
 
   constructor(private portfolioService: PortfolioService,
               private workflowStatesService: WorkflowStatesService) {
@@ -88,13 +91,19 @@ export class PortfolioComponent implements OnInit, OnChanges {
 
 
   private initFilteredTableData() {
-    this.portfolioService.getResponsesByFilter(this.currentPage, this.recordsPerPage, this.searchData, this.selectedStatusId, this.sortingOption)
+    this.filterObservable = this.portfolioService.getResponsesByFilter(this.currentPage, this.recordsPerPage, this.searchData, this.selectedStatusId, this.sortingOption)
       .subscribe(data => {
         this.filteredTableData = data.filteredData;
         this.filteredDataLength = data.filteredDataLength;
       });
   }
+
+  ngOnDestroy(): void {
+    console.log(this.filterObservable);
+    this.filterObservable.unsubscribe()
+  }
 }
+
 
 
 
