@@ -1,0 +1,9 @@
+<div class="pagination">
+   <a href="javascript:void(0);" (click)="onClickPage(activePage - 1)">&laquo;</a>
+  <a href="javascript:void(0);" [ngClass]="{'active': activePage === item}" *ngFor="let item of pages" (click)="onClickPage(item)">{{ item }}</a>
+  <a href="javascript:void(0);" (click)="onClickPage(activePage + 1)">&raquo;</a>
+</div>
+
+
+
+

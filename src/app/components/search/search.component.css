@@ -1,0 +1,114 @@
+.filters {
+  padding: 30px;
+}
+
+.filters div{
+  padding-bottom: 20px;
+}
+
+.head {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 15px;
+  background-color: #444444;
+  display: flex;
+  justify-content: space-between;
+}
+
+.head h1{
+  color: white;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+}
+
+.head .menu-icon div {
+  width: 20px;
+  height: 3px;
+  background-color: white;
+  margin: 2px 0;
+  border-radius: 2px;
+}
+
+
+.filters .buttons{
+  display: flex;
+  justify-content: start;
+}
+
+.filters .buttons button{
+  padding: 5px 20px;
+  font-size: 18px;
+  border:1px solid grey;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.filters .buttons button:first-child{
+  background-color: #43A047;
+  color: white;
+}
+
+.filters .select-filter {
+  display: flex;
+  flex-direction: column;
+}
+.filters .select-filter select {
+  padding: 5px;
+  width: 100%;
+  margin-top: 5px;
+  border-radius: 5px;
+  border:1px solid grey
+}
+
+.filters .keyword-filter {
+  display: flex;
+  flex-direction: column;
+}
+
+.filters .keyword-filter input {
+  padding: 10px;
+  width: 92%;
+  margin-top: 5px;
+  border-radius: 5px;
+  border:1px solid grey;
+}
+
+.filters .checkbox-filter {
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+}
+
+
+.filters .checkbox-filter div input{
+  margin-right: 10px;
+}
+
+.filters .colendar {
+  margin-top: 15px;
+}
+
+.filters .colendar div {
+  display: flex;
+  flex-direction: column;
+}
+
+.filters .colendar div input{
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.filters .keyword-filter .ng-invalid.ng-touched{
+  border: 1px solid red;
+}
+
+.filters .keyword-filter .ng-valid.ng-touched{
+  border: 1px solid green;
+}
+
+.validation{
+  padding: 8px 0;
+  color: rgba(255, 0, 0, 0.71);
+  border-radius: 5px;
+}
