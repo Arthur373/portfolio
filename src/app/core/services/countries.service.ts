@@ -8,7 +8,7 @@ import {Observable} from "rxjs";
 @Injectable()
 export class CountriesService {
 
-  private countries$!: Observable<CountryModel[]>;
+  private readonly countries$!: Observable<CountryModel[]>;
 
   constructor(private http: HttpClient) {
     this.countries$ = this.http.get<CountryModel[]>("/assets/Countries.json").pipe(
@@ -17,11 +17,11 @@ export class CountriesService {
     )
   }
 
-  findCountries(): Observable<CountryModel[]> {
+  getCountries(): Observable<CountryModel[]> {
     return this.countries$;
   }
 
-  findCountryNameById(id: number): Observable<string> {
+  getCountryNameById(id: number): Observable<string> {
     return this.countries$.pipe(map(countries => <string>countries.find(country => country.CountryId === id)?.name[3]));
   }
 }

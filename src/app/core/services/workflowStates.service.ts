@@ -7,7 +7,7 @@ import {HttpClient} from "@angular/common/http";
 @Injectable()
 export class WorkflowStatesService {
 
-  private workFlowStates$!: Observable<Status[]>;
+  private readonly workFlowStates$!: Observable<Status[]>;
 
   constructor(private http: HttpClient) {
     this.workFlowStates$ = this.http.get<Status[]>("/assets/WorkflowStates.json").pipe(
@@ -16,11 +16,11 @@ export class WorkflowStatesService {
     )
   }
 
-  findAllWorkflowStates(){
+  getAllWorkflowStates() {
     return this.workFlowStates$;
   }
 
-  findWorkflowStatesNameById(id: number):Observable<string>{
+  getWorkflowStatesNameById(id: number): Observable<string> {
     return this.workFlowStates$.pipe(map(statuses => <string>statuses.find(state => state.WFSTATEID === id)?.name[3]));
   }
 }

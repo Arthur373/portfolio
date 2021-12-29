@@ -11,7 +11,7 @@ export class PortfolioFilterService {
     if (statusId) {
       filterData = this.filterStatusById(filterData, statusId);
     }
-    if(searchData) {
+    if (searchData) {
       if (searchData?.countryId) {
         filterData = this.filterCountryById(filterData, searchData.countryId)
       }
@@ -25,22 +25,19 @@ export class PortfolioFilterService {
     return filterData;
   }
 
-  /** filter status  */
   private filterStatusById(filterData, statusId?: number): Portfolio[] {
     return filterData.filter(response => statusId === response.workflowStateId);
   }
 
-  /** filter country  */
   private filterCountryById(filterData: Portfolio[], countryId: number): Portfolio[] {
     return filterData.filter(response => countryId === response.InterventionCountryID);
   }
 
-  /** filter keyword */
   private filterByKeyword(filterData: Portfolio[], searchData: Search): Portfolio[] {
-    return filterData.filter(data => this.filterKeyword(data, searchData));
+    return filterData.filter(data => PortfolioFilterService.filterKeyword(data, searchData));
   }
 
-  private filterKeyword(data: Portfolio, searchData: Search): boolean {
+  private static filterKeyword(data: Portfolio, searchData: Search): boolean {
     let isChecked: boolean = false;
     let nothingSelect: boolean = false;
     if (!(searchData.code || searchData.title || searchData.shortName || searchData.description)) {
@@ -74,7 +71,11 @@ export class PortfolioFilterService {
   }
 
   /** filter date */
-  private dateFilter(data: Portfolio, searchData: Search): boolean {
+  private filterByDate(filterData: Portfolio[], searchData: Search): Portfolio[] {
+    return filterData.filter(data => PortfolioFilterService.dateFilter(data, searchData));
+  }
+
+  private static dateFilter(data: Portfolio, searchData: Search): boolean {
     const searchStartDate = searchData.fromDate ? new Date(searchData.fromDate).getTime() : 0;
     const searchEndDate = searchData.toDate ? new Date(searchData.toDate).getTime() : new Date().getTime();
     const actualDate = new Date(data.ActualStartDate).getTime();
@@ -82,7 +83,4 @@ export class PortfolioFilterService {
     return searchStartDate <= actualDate && actualDate <= searchEndDate;
   }
 
-  private filterByDate(filterData: Portfolio[], searchData: Search): Portfolio[] {
-    return filterData.filter(data => this.dateFilter(data, searchData));
-  }
 }

@@ -1,6 +1,6 @@
 export interface Portfolio {
   InterventionInstanceId: number,
-  InterventionCode : string,
+  InterventionCode: string,
   ShortName: string,
   Title: string,
   InterventionCountryID: number,
@@ -8,5 +8,5 @@ export interface Portfolio {
   UpdatedUserID: number,
   Description: string,
   DateUpdated: number,
-  ActualStartDate:string
+  ActualStartDate: string
 }

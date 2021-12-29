@@ -4,7 +4,7 @@ import {Portfolio} from "../../core/models/portfolio.model";
 import {Observable} from "rxjs";
 
 @Pipe({
-  name: 'user'
+  name: 'userName'
 })
 export class UserPipe implements PipeTransform {
 
@@ -12,6 +12,6 @@ export class UserPipe implements PipeTransform {
   }
 
   transform(portfolio: Portfolio): Observable<string> {
-    return this.usersService.findUserNameById(portfolio?.UpdatedUserID);
+    return this.usersService.getUserNameById(portfolio?.UpdatedUserID);
   }
 }

@@ -12,49 +12,48 @@ import {CountryModel} from "../../core/models/Country.model";
 })
 export class SearchComponent implements OnInit {
 
-  @Output() searchFilterData = new EventEmitter<Search>();
+  @Output() searchChange = new EventEmitter<Search>();
   form!: FormGroup;
   countries!: CountryModel[];
 
   constructor(private countriesService: CountriesService) {
-      this.createForm();
+    this.createForm();
   }
 
-  createForm(){
+  createForm() {
     this.form = new FormGroup({
-      "countryId": new FormControl(0,[]),
-      "keyword": new FormControl("",[Validators.minLength(3)]),
-      "code": new FormControl("",[]),
-      "title": new FormControl("",[]),
-      "shortName": new FormControl("",[]),
-      "description": new FormControl("",[]),
-      "fromDate": new FormControl("",[]),
-      "toDate": new FormControl("",[]),
+      "countryId": new FormControl(0, []),
+      "keyword": new FormControl("", [Validators.minLength(3)]),
+      "code": new FormControl("", []),
+      "title": new FormControl("", []),
+      "shortName": new FormControl("", []),
+      "description": new FormControl("", []),
+      "fromDate": new FormControl("", []),
+      "toDate": new FormControl("", []),
     })
   }
 
   ngOnInit(): void {
-    this.countriesService.findCountries().subscribe(data => this.countries = data);
+    this.countriesService.getCountries().subscribe(countries => this.countries = countries);
   }
 
-  onSearch(){
-    const search =
-      {
-        countryId: +this.form.controls["countryId"].value,
-        keyword: this.form.controls["keyword"].value,
-        code: this.form.controls["code"].value,
-        title: this.form.controls["title"].value,
-        shortName: this.form.controls["shortName"].value,
-        description: this.form.controls["description"].value,
-        fromDate: this.form.controls["fromDate"].value,
-        toDate: this.form.controls["toDate"].value,
-      }
-      if(this.form.valid){
-        this.searchFilterData.emit(search);
-      }
+  onSearch() {
+    const search = {
+      countryId: +this.form.controls["countryId"].value,
+      keyword: this.form.controls["keyword"].value,
+      code: this.form.controls["code"].value,
+      title: this.form.controls["title"].value,
+      shortName: this.form.controls["shortName"].value,
+      description: this.form.controls["description"].value,
+      fromDate: this.form.controls["fromDate"].value,
+      toDate: this.form.controls["toDate"].value,
+    }
+    if (this.form.valid) {
+      this.searchChange.emit(search);
+    }
   }
 
-  reset(){
-    this.searchFilterData.emit(null);
+  reset() {
+    this.searchChange.emit(null);
   }
 }

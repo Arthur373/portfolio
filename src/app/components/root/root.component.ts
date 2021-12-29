@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Search} from "../core/models/search.model";
+import {Component, OnInit} from '@angular/core';
+import {Search} from "../../core/models/search.model";
 
 @Component({
   selector: 'root-project',
@@ -8,9 +8,9 @@ import {Search} from "../core/models/search.model";
 })
 export class RootComponent {
 
-  searchData!:Search;
+  searchData!: Search;
 
-  getSearchFilterData(search: Search){
+  onSearchChange(search: Search) {
     this.searchData = search;
   }
 

@@ -1,6 +1,6 @@
 <div class="portfolio">
   <div class="side-bar">
-    <app-search (searchFilterData)="getSearchFilterData($event)"></app-search>
+    <app-search (searchChange)="onSearchChange($event)"></app-search>
   </div>
   <div class="content">
     <app-portfolio [searchData]="searchData"></app-portfolio>

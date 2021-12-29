@@ -6,57 +6,45 @@ import {Portfolio} from "../../core/models/portfolio.model";
 import {FormControl} from "@angular/forms";
 import {Status} from "../../core/models/status.model";
 import {Subscription} from "rxjs";
-import {BehaviorSubject} from "rxjs";
-import {Subject} from "rxjs";
-import {share, takeUntil} from "rxjs/operators";
+import {SortingOptionModel} from "../../core/models/sortingOption.model";
 
+// TODO: Clean code
 @Component({
   selector: 'app-portfolio',
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.css']
 })
-export class PortfolioComponent implements OnInit, OnChanges,OnDestroy {
+export class PortfolioComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() searchData!: Search;
-  responses: Portfolio[] = [];
+  private portfolios: Portfolio[] = [];
   filteredTableData: Portfolio[] = [];
   statuses: Status[] = [];
-  selectedStatusId: number = 0;
+  private selectedStatusId: number = 0;
   statusControl: FormControl = new FormControl(0);
 
   /** sort */
-  sortingOption: { fieldName: string, sortType: number } = {fieldName: "", sortType: -1}
+    // TODO: use model
+  private sortingOption: SortingOptionModel = {fieldName: "", sortType: -1}
 
   /** pagination */
   filteredDataLength: number = 0;
-  currentPage: number = 0;
+  private currentPage: number = 0;
   recordsPerPage: number = 4;
 
   color: string = "rgb(180, 179, 179)";
 
-  filterObservable:Subscription;
-
-  private destroyStream = new Subject<void>()
+  private filterObservable: Subscription;
 
   constructor(private portfolioService: PortfolioService,
               private workflowStatesService: WorkflowStatesService) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.searchData == null || this.searchData) {
-      this.initFilteredTableData();
-    }
+    this.initFilteredTableData();
   }
 
   ngOnInit(): void {
-    // const sbj = new BehaviorSubject<number>(5);
-    //
-    // sbj.subscribe((vl) => console.log(`1st: ${vl}`));
-    // sbj.subscribe((vl) => console.log(`2nd: ${vl}`));
-    // sbj.next(7);
-    // sbj.next(9);
-    // sbj.subscribe((vl) => console.log(`3nd: ${vl}`));
-
     this.initTableData()
     this.initStatuses();
     this.statusControl.valueChanges.subscribe((newStatus: string) => this.filterByStatus(+newStatus))
@@ -65,8 +53,8 @@ export class PortfolioComponent implements OnInit, OnChanges,OnDestroy {
   private initTableData() {
     this.portfolioService.getResponses(1, this.recordsPerPage)
       .subscribe(data => {
-        this.responses = data.filteredData;
-        this.filteredTableData = this.responses;
+        this.portfolios = data.filteredData;
+        this.filteredTableData = this.portfolios;
         this.filteredDataLength = data.filteredDataLength;
       });
   }
@@ -83,7 +71,7 @@ export class PortfolioComponent implements OnInit, OnChanges,OnDestroy {
   }
 
   /** sort table */
-  sortTable(fieldName: string, event: MouseEvent): void {
+  sortTable(fieldName: string): void {
     this.sortingOption.fieldName = fieldName;
     this.getSortType(fieldName, this.sortingOption.fieldName);
     this.initFilteredTableData();
@@ -99,11 +87,14 @@ export class PortfolioComponent implements OnInit, OnChanges,OnDestroy {
 
   /** show status data */
   initStatuses(): void {
-    this.workflowStatesService.findAllWorkflowStates().subscribe(data => this.statuses = Array.from(new Set(data)));
+    this.workflowStatesService.getAllWorkflowStates().subscribe(data => this.statuses = Array.from(new Set(data)));
   }
 
 
   private initFilteredTableData() {
+    if (this.filterObservable) {
+      this.filterObservable.unsubscribe();
+    }
     this.filterObservable = this.portfolioService.getResponsesByFilter(this.currentPage, this.recordsPerPage, this.searchData, this.selectedStatusId, this.sortingOption)
       // .pipe(
       //   share(), // publish().refCount() create one Tread subject-ov refCount-e vorosheg@ erb skse ashaxdel erb verjacne
@@ -118,7 +109,7 @@ export class PortfolioComponent implements OnInit, OnChanges,OnDestroy {
   ngOnDestroy(): void {
     console.log(this.filterObservable);
     // this.destroyStream.next();
-    this.filterObservable.unsubscribe();
+    this.filterObservable?.unsubscribe();
   }
 }
 

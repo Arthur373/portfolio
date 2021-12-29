@@ -7,21 +7,21 @@ import {Observable} from "rxjs";
 @Injectable()
 export class UsersService {
 
-  private users$: Observable<User[]>;
+  private readonly users$: Observable<User[]>;
 
   constructor(private http: HttpClient) {
     this.users$ = this.http.get<User[]>("/assets/Users.json").pipe(
       map(responseData => responseData["data"]),
-      shareReplay({bufferSize:1,refCount:true}),
+      shareReplay({bufferSize: 1, refCount: true}),
     )
   }
 
-  findUsers(): Observable<User[]> {
+  getUsers(): Observable<User[]> {
     return this.users$;
 
   }
 
-  findUserNameById(id: number): Observable<string> {
+  getUserNameById(id: number): Observable<string> {
     return this.users$.pipe(map(users => <string>users.find(user => user.UserID === id)?.name[3]))
   }
 }

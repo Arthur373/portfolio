@@ -1,11 +1,10 @@
 import {Pipe, PipeTransform} from '@angular/core';
 import {WorkflowStatesService} from "../../core/services/workflowStates.service";
 import {Portfolio} from "../../core/models/portfolio.model";
-import {map} from "rxjs/operators";
 import {Observable} from "rxjs";
 
 @Pipe({
-  name: 'status'
+  name: 'statusName'
 })
 export class StatusPipe implements PipeTransform {
 
@@ -13,6 +12,6 @@ export class StatusPipe implements PipeTransform {
   }
 
   transform(portfolio: Portfolio): Observable<string> {
-    return this.workflowStatesService.findWorkflowStatesNameById(portfolio?.workflowStateId);
+    return this.workflowStatesService.getWorkflowStatesNameById(portfolio?.workflowStateId);
   }
 }

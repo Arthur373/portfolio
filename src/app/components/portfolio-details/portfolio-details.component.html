@@ -5,9 +5,9 @@
   <p>Short Name - <span>{{ portfolio.ShortName }}</span></p>
   <p>Title - <span>{{ portfolio.Title }}</span></p>
   <p>Description - <span>{{ portfolio.Description }}</span></p>
-  <p>Country - <span>{{ portfolio | country | async }}</span></p>
-  <p>Status - <span>{{ portfolio | status | async }}</span></p>
-  <p>Last Update By - <span>{{ portfolio | user | async }}</span></p>
+  <p>Country - <span>{{ portfolio | countryName | async }}</span></p>
+  <p>Status - <span>{{ portfolio | statusName | async }}</span></p>
+  <p>Last Update By - <span>{{ portfolio | userName | async }}</span></p>
   <p>Actual Start on - <span>{{ portfolio.ActualStartDate | date : "fullDate" }}</span></p>
   <p>Last Update On - <span>{{ portfolio.DateUpdated | date : "fullDate" }}</span></p>
 </div>

@@ -1,8 +1,6 @@
-type name = {
-  "3":string,
-  "4":string
-}
+import {MultilingualModel} from "./multilingual.model";
+
 export interface CountryModel {
-  CountryId:number,
-  name:name
+  CountryId: number,
+  name: MultilingualModel
 }

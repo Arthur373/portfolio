@@ -1,8 +1,8 @@
 <div class="filter-add">
   <div>
     <label for="status">Status</label>
-<!--    [ngModel]="selectedStatus" (ngModelChange)="filterStatus($event)"-->
-    <select name="country"  id="status"  [formControl]="statusControl">
+    <!--    [ngModel]="selectedStatus" (ngModelChange)="filterStatus($event)"-->
+    <select name="country" id="status" [formControl]="statusControl">
       <option value="0">--All statuses--</option>
       <option *ngFor="let status of statuses" [value]="status.WFSTATEID">{{ status.name[3] }}</option>
     </select>
@@ -13,31 +13,32 @@
 <table>
   <thead>
   <tr>
-    <th>Intervention Code <i class="fa fa-sort"  (click)="sortTable('InterventionCode',$event)"></i></th>
-    <th>Short Name <i class="fa fa-sort"  (click)="sortTable('ShortName',$event)"></i></th>
-    <th>Title <i class="fa fa-sort"  (click)="sortTable('Title',$event)"></i></th>
-    <th>Country <i class="fa fa-sort"  (click)="sortTable('InterventionCountryID',$event)"></i></th>
-    <th>Status <i class="fa fa-sort"  (click)="sortTable('workflowStateId',$event)"></i></th>
-    <th>Last Update By <i class="fa fa-sort"  (click)="sortTable('UpdatedUserID',$event)"></i></th>
-    <th>Last Update On <i class="fa fa-sort"  (click)="sortTable('DateUpdated',$event)"></i></th>
+    <th>Intervention Code <i class="fa fa-sort" (click)="sortTable('InterventionCode')"></i></th>
+    <th>Short Name <i class="fa fa-sort" (click)="sortTable('ShortName')"></i></th>
+    <th>Title <i class="fa fa-sort" (click)="sortTable('Title')"></i></th>
+    <th>Country <i class="fa fa-sort" (click)="sortTable('InterventionCountryID')"></i></th>
+    <th>Status <i class="fa fa-sort" (click)="sortTable('workflowStateId')"></i></th>
+    <th>Last Update By <i class="fa fa-sort" (click)="sortTable('UpdatedUserID')"></i></th>
+    <th>Last Update On <i class="fa fa-sort" (click)="sortTable('DateUpdated')"></i></th>
   </tr>
   </thead>
 
   <tbody>
-  <tr *ngFor="let data of filteredTableData" [hover]="color" >
-    <td><a [routerLink]="['/intervention',data.InterventionInstanceId]">{{ data.InterventionCode }}</a></td>
+  <tr *ngFor="let data of filteredTableData" [hover]="color">
+    <td><a [routerLink]="['/portfolios',data.InterventionInstanceId]">{{ data.InterventionCode }}</a></td>
     <td>{{ data.ShortName }}</td>
     <td>{{ data.Title }}</td>
-    <td>{{ (data | country | async)}}</td>
-    <td>{{ data | status | async }}</td>
-    <td>{{ data | user | async }}</td>
+    <td>{{ (data | countryName | async)}}</td>
+    <td>{{ data | statusName | async }}</td>
+    <td>{{ data | userName | async }}</td>
     <td>{{ data.DateUpdated | date : "dd/MM/YYYY" }}</td>
   </tr>
   </tbody>
 </table>
 
 <div class="pagination-place">
-  <app-pagination [totalRecords]="filteredDataLength" [recordsPerPage]="recordsPerPage" (onPageChange)="onPageChange($event)"></app-pagination>
+  <app-pagination [totalRecords]="filteredDataLength" [recordsPerPage]="recordsPerPage"
+                  (onPageChange)="onPageChange($event)"></app-pagination>
 </div>
 
 

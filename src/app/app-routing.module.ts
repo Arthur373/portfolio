@@ -1,22 +1,29 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 
-import {RouterModule, Routes} from "@angular/router";
-import {RootComponent} from "./root/root.component";
-import {InterventionDetailsComponent} from "./components/intervention-details/intervention-details.component";
+import {PreloadAllModules, RouterModule, Routes} from "@angular/router";
+import {RootComponent} from "./components/root/root.component";
 import {NotFoundComponent} from "./components/not-found/not-found.component";
 
 const routes: Routes = [
-  { path: '',component: RootComponent,
-    children:[
-      { path: 'intervention', component: RootComponent }
+  {
+    path: '', component: RootComponent,
+    children: [
+      {path: 'portfolios', component: RootComponent}
     ]
   },
-  { path: 'intervention/:interventionID',component: InterventionDetailsComponent },
-  { path: '**',component: NotFoundComponent }
+  // TODO: use lazy load
+  {
+    path: 'portfolios/:portfolioInstanceID',
+    loadChildren: () => import('./components/portfolio-details/portfolio-details.module').then(m => m.PortfolioDetailsModule)
+  },
+  {path: '**', component: NotFoundComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadAllModules
+  })],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

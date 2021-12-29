@@ -1,9 +1,7 @@
-type name = {
-  "3":string,
-  "4":string
-}
+import {MultilingualModel} from "./multilingual.model";
+
 export interface User {
-  UserID:number,
-  name:name,
-  StatusID:number
+  UserID: number,
+  name: MultilingualModel,
+  StatusID: number
 }

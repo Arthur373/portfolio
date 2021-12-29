@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {UserPipe} from "./pipes/user.pipe";
 import {CountryPipe} from "./pipes/country.pipe";
 import {StatusPipe} from "./pipes/status.pipe";
@@ -21,8 +20,6 @@ import {HoverDirective} from "./directives/hover.directive";
 
     HoverDirective,
   ],
-  imports: [
-    CommonModule,
-  ]
 })
-export class SharedModule { }
+export class SharedModule {
+}

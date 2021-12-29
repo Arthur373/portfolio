@@ -5,21 +5,22 @@ import {Directive, ElementRef, HostListener, Input, Renderer2} from '@angular/co
 })
 export class HoverDirective {
 
-  @Input("hover") color!:string;
+  @Input("hover") color!: string;
 
-  constructor(private elementRef : ElementRef,private renderer : Renderer2) { }
+  constructor(private elementRef: ElementRef, private renderer: Renderer2) {
+  }
 
   @HostListener("mouseenter")
-  onMouseEnter(){
+  onMouseEnter() {
     this.changeColor(this.color);
   }
 
   @HostListener("mouseleave")
-  onMouseLeave(){
+  onMouseLeave() {
     this.changeColor("");
   }
 
-  changeColor(color: string){
-    this.renderer.setStyle(this.elementRef.nativeElement,"background-color",color);
+  changeColor(color: string) {
+    this.renderer.setStyle(this.elementRef.nativeElement, "background-color", color);
   }
 }

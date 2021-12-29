@@ -3,8 +3,9 @@ import {CountriesService} from "../../core/services/countries.service";
 import {Portfolio} from "../../core/models/portfolio.model";
 import {Observable} from "rxjs";
 
+// TODO: rename
 @Pipe({
-  name: 'country'
+  name: 'countryName'
 })
 export class CountryPipe implements PipeTransform {
 
@@ -12,6 +13,6 @@ export class CountryPipe implements PipeTransform {
   }
 
   transform(portfolio: Portfolio): Observable<string> {
-    return this.countriesService.findCountryNameById(portfolio?.InterventionCountryID);
+    return this.countriesService.getCountryNameById(portfolio?.InterventionCountryID);
   }
 }

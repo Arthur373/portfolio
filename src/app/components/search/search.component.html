@@ -9,61 +9,61 @@
 
 <div class="filters">
 
-    <form [formGroup]="form">
-      <div class="buttons">
-        <button type="button" (click)="onSearch()">Search</button>
-        <button type="reset" (click)="reset()">Reset</button>
+  <form [formGroup]="form">
+    <div class="buttons">
+      <button type="button" (click)="onSearch()">Search</button>
+      <button type="reset" (click)="reset()">Reset</button>
+    </div>
+
+    <div class="select-filter">
+      <label for="country">Country</label>
+      <select name="" id="country" formControlName="countryId">
+        <option value="0">--Select Country--</option>
+        <option *ngFor="let country of countries" [value]="country?.CountryId">{{ country.name[3] }}</option>
+      </select>
+    </div>
+
+    <div class="keyword-filter">
+      <label for="keyword">Keyword</label>
+      <input type="text" name="keyword" id="keyword" formControlName="keyword">
+      <div class="validation" *ngIf="form.get('keyword')?.invalid && form.get('keyword')?.touched">
+        <small>Minimal length is 3</small>
+      </div>
+    </div>
+
+    <div class="checkbox-filter">
+      <div>
+        <input type="checkbox" name="code" id="code" value="InterventionCode" formControlName="code"><label for="code">Code
+        of the intervention</label>
+      </div>
+      <div>
+        <input type="checkbox" name="title" id="title" value="Title" formControlName="title"><label for="title">Title of
+        the intervention</label>
+      </div>
+      <div>
+        <input type="checkbox" name="shortName" id="shortName" value="ShortName" formControlName="shortName"><label
+        for="shortName">Intervention Short Name</label>
+      </div>
+      <div>
+        <input type="checkbox" name="description" id="description" value="Description"
+               formControlName="description"><label for="description">Intervention Description</label>
+      </div>
+    </div>
+
+
+    <h2>Actual Start Date</h2>
+
+
+    <div class="colendar">
+      <div>
+        <label for="from">From</label>
+        <input type="date" id="from" formControlName="fromDate">
       </div>
 
-      <div class="select-filter">
-        <label for="country">Country</label>
-        <select name="" id="country" formControlName="countryId">
-          <option value="0">--Select Country--</option>
-          <option *ngFor="let country of countries" [value]="country?.CountryId">{{ country.name[3] }}</option>
-        </select>
+      <div>
+        <label for="to">To</label>
+        <input type="date" id="to" formControlName="toDate">
       </div>
-
-      <div class="keyword-filter">
-        <label for="keyword">Keyword</label>
-        <input type="text" name="keyword" id="keyword" formControlName="keyword">
-        <div class="validation" *ngIf="form.get('keyword')?.invalid && form.get('keyword')?.touched">
-          <small>Minimal length is 3</small>
-        </div>
-      </div>
-
-      <div class="checkbox-filter">
-        <div>
-          <input type="checkbox" name="code" id="code" value="InterventionCode" formControlName="code"><label for="code">Code
-          of the intervention</label>
-        </div>
-        <div>
-          <input type="checkbox" name="title" id="title" value="Title" formControlName="title"><label for="title">Title of
-          the intervention</label>
-        </div>
-        <div>
-          <input type="checkbox" name="shortName" id="shortName" value="ShortName" formControlName="shortName"><label
-          for="shortName">Intervention Short Name</label>
-        </div>
-        <div>
-          <input type="checkbox" name="description" id="description" value="Description"
-                 formControlName="description"><label for="description">Intervention Description</label>
-        </div>
-      </div>
-
-
-      <h2>Actual Start Date</h2>
-
-
-      <div class="colendar">
-        <div>
-          <label for="from">From</label>
-          <input type="date" id="from" formControlName="fromDate">
-        </div>
-
-        <div>
-          <label for="to">To</label>
-          <input type="date" id="to" formControlName="toDate">
-        </div>
-      </div>
-    </form>
-  </div>
+    </div>
+  </form>
+</div>
