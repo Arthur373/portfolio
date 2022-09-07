@@ -7,9 +7,13 @@ import {HttpClient} from "@angular/common/http";
 @Injectable()
 export class WorkflowStatesService {
 
-  private readonly workFlowStates$!: Observable<Status[]>;
+  private workFlowStates$!: Observable<Status[]>;
 
   constructor(private http: HttpClient) {
+    this.initWorkflowStates();
+  }
+
+  initWorkflowStates(){
     this.workFlowStates$ = this.http.get<Status[]>("/assets/WorkflowStates.json").pipe(
       map(responseData => responseData["data"]),
       shareReplay({bufferSize: 1, refCount: true}),

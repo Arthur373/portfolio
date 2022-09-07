@@ -7,9 +7,13 @@ import {Observable} from "rxjs";
 @Injectable()
 export class UsersService {
 
-  private readonly users$: Observable<User[]>;
+  private users$: Observable<User[]>;
 
   constructor(private http: HttpClient) {
+    this.initUsers();
+  }
+
+  initUsers(){
     this.users$ = this.http.get<User[]>("/assets/Users.json").pipe(
       map(responseData => responseData["data"]),
       shareReplay({bufferSize: 1, refCount: true}),

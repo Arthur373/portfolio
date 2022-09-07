@@ -8,9 +8,13 @@ import {Observable} from "rxjs";
 @Injectable()
 export class CountriesService {
 
-  private readonly countries$!: Observable<CountryModel[]>;
+  private countries$!: Observable<CountryModel[]>;
 
   constructor(private http: HttpClient) {
+    this.initCountries();
+  }
+
+  private initCountries(){
     this.countries$ = this.http.get<CountryModel[]>("/assets/Countries.json").pipe(
       map(responseData => responseData["data"]),
       shareReplay({bufferSize: 1, refCount: true}),

@@ -1,0 +1,103 @@
+zaprosnerin jamanak tam` pagination-i hamar; // chi ashxadi qani vor amen angam taza observable ksarqe
+
+zip avelacnem countries-i user-i u status-i hamar;
+
+
+
+
+
+// (countries.find(country => <CountryModel>country.CountryId === a[sortBy])?.name[3])?.localeCompare(
+//   this.countriesService.findCountryName(b[sortBy]))) * sortType
+
+
+
+  // return this.http.get("/assets/Response.json").pipe(
+  //   map(responseData => {
+  //     const responses = responseData["data"] as Array<Portfolio>;
+  //     // TODO: add paging and filter and sorting
+  //
+  //     let filteredData: Portfolio[] = this.filterData(responses, searchData, statusId);
+  //     let filteredDataLength: number = filteredData.length;
+  //     this.sortData(filteredData, sortingOption.fieldName, sortingOption.sortType);
+  //
+  //     filteredData = this.getPaginationData(filteredData, currentPage, pageNumber);
+  //
+  //     return {filteredData, filteredDataLength};
+  //   })
+  // )
+
+
+      const search =
+        {
+          countryId: 0,
+          keyword: "",
+          code: false,
+          title: false,
+          shortName: false,
+          description: false,
+          fromDate: 0,
+          toDate: 0,
+        }
+
+
+    // if (this.users) {
+    //   return of(this.users);
+    // } else {
+    //   return this.http.get<User[]>("/assets/Users.json").pipe(
+    //     map(responseData => {
+    //       this.users = responseData["data"];
+    //       return this.users;
+    //     }),
+    //   )
+    // }
+
+
+        // if (this.users) {
+        //   return of(<string>this.users.find(user => user.UserID === id)?.name[3]);
+        // } else {
+        //   return this.http.get<User[]>("/assets/Users.json").pipe(
+        //     map(users => {
+        //       return <string>users.find(user => user.UserID === id)?.name[3]
+        //     })
+        //   )
+        // }
+
+
+
+
+  // private destroyStream = new Subject<void>()
+
+
+            // const sbj = new BehaviorSubject<number>(5);
+            //
+            // sbj.subscribe((vl) => console.log(`1st: ${vl}`));
+            // sbj.subscribe((vl) => console.log(`2nd: ${vl}`));
+            // sbj.next(7);
+            // sbj.next(9);
+            // sbj.subscribe((vl) => console.log(`3nd: ${vl}`));
+
+            // this.source = interval(1000).pipe(
+            //   shareReplay({refCount: false, bufferSize: 2})
+            //   // publishReplay(1),
+            //   // refCount()
+            // );
+            // const sub1 = this.source.subscribe(x => console.log('sub 1', x));
+            // const sub2 = this.source.subscribe(x => console.log('sub 2', x));
+            // setTimeout(() => {
+            //   sub1.unsubscribe();
+            //   sub2.unsubscribe();
+            // }, 2000);
+            this.source = interval(1000).pipe(
+              // take(2),
+              // takeUntil(this.destroyStream),
+              publishLast(),
+              refCount()
+            );
+            const sub1 = this.source.subscribe(x => console.log('sub 1', x));
+            const sub2 = this.source.subscribe(x => console.log('sub 2', x));
+
+            setTimeout(() => {
+              const sub3 = this.source.subscribe(x => console.log('sub 3', x));
+            }, 7000);
+
+

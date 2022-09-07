@@ -25,7 +25,7 @@ import {NotFoundComponent} from './components/not-found/not-found.component';
     AppPaginationComponent,
     RootComponent,
     PortfolioComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

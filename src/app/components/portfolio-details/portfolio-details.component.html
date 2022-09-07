@@ -1,4 +1,4 @@
-<div class="portfolio-details" *ngIf="portfolio">
+<div class="portfolio-details" *ngIf="portfolio$ | async as portfolio">
   <h2>Portfolio <span>{{ portfolio.InterventionCode }}</span> details</h2>
   <p>Intervention Id - <span>{{ portfolio.InterventionInstanceId }}</span></p>
   <p>Intervention Code - <span>{{ portfolio.InterventionCode }}</span></p>

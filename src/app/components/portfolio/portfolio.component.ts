@@ -42,6 +42,7 @@ export class PortfolioComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.initFilteredTableData();
+    console.log("asdasdasd")
   }
 
   ngOnInit(): void {
@@ -107,7 +108,7 @@ export class PortfolioComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log(this.filterObservable);
+    // console.log(this.filterObservable);
     // this.destroyStream.next();
     this.filterObservable?.unsubscribe();
   }
